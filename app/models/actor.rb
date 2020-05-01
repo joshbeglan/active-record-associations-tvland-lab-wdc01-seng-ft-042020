@@ -8,12 +8,18 @@ class Actor < ActiveRecord::Base
     end 
 
     def list_roles
-     characters = Character.all.select {|character| character.actor_id == self.id}
-     name = characters.select {|character| character.name}
-     shows = characters.map {|char| char.show_id}
-     show = shows.select {|show| show.name}
-     puts "#{name} - #{show}"
+    #  characters = Character.all.select {|character| character.actor_id == self.id}
+    #  name = characters.select {|character| character.name}
+    #  shows = characters.map {|char| char.show_id}
+    #  show = shows.select {|show| show.name}
+    #  puts "#{name} - #{show}"
    
+    character = Character.find_by(actor_id: self.id)
+    show = Show.find_by(id: character.show_id)
+
+    return "#{character.name} - #{show.name}"
+
+
 
     end 
     
